@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "ESNext", //VERSAO DO ECMA SCRIPT
+        "module": "CommonJS", //MODULO
+        "lib": [
+            "ES2023",
+            "DOM"
+        ], //ADICIONAR DOM PARA TYPESCRIPT
+        "outDir": "./dist", //ARQUIVO DE SAIDA PRODUCAO
+        "rootDir": "./src", //ARQUIVO DE ENTRADA DESENVOLVIMENTO
+        "removeComments": true, //REMOVER COMENTARIOS
+        "noEmitOnError": true, //NAO COMPILAR SE HOUVER ERRO
+        "strict": true, //ATIVAR O MODO ESTRICTO
+        "esModuleInterop": true, //PERMITIR IMPORTAR MODULOS
+        "skipLibCheck": true, //IGNORAR ERROS DE MODULOS
+        "typeRoots": ["./node_modules/@types"]
+    },
+    "include": [
+        "src" //ARQUIVO DE ENTRADA
+    ],
+}
