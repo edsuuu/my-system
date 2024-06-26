@@ -18,16 +18,17 @@ class EmailController {
             console.log(req.body);
 
             // Verifica a se tem espaços na esquerda ou direita da string
+            console.log('passei 1');
             name = name?.trim();
             email = email?.trim();
             assunto = assunto?.trim();
             message = message?.trim();
-
             // Faz a validacao de todos os campos recebido
             bodyValidator.bodyIsEmpty(name, email, message, assunto);
             if (!emailValidator.emailIsValid(email)) {
                 bodyValidator.errors.push({ message: 'O email é inválido' });
             }
+            console.log('passei 2');
 
             // Se houver erro retorna todos erros num array
             const errors = bodyValidator.getErrors();
