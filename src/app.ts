@@ -36,8 +36,8 @@ class App {
     }
 
     routes() {
-        this.app.use('/api/', homeRoute);
-        this.app.use('/api/', emailRoute);
+        this.app.use('/', homeRoute);
+        this.app.use('/email', emailRoute);
     }
 }
 
