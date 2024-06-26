@@ -3,6 +3,6 @@ import EmailController from '../../controllers/email';
 
 const emailRoute: Router = Router();
 
-emailRoute.get('/', EmailController.index);
+emailRoute.post('/', EmailController.sendMessage);
 
 export { emailRoute };
