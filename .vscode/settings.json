@@ -8,6 +8,10 @@
         "source.fixAll.eslint": "explicit",
         "source.fixAll": "explicit"
     },
+    "symbols.folders.associations": {
+        "entities": "folder-assets",
+        "infra": "folder-app",
+        "schemas": "folder-purple",
+        "log": "folder-core",
+    }
 }
-
-

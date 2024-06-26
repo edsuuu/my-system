@@ -2,17 +2,12 @@ import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
-import mongoose from 'mongoose';
-import database from './config/db';
-import { homeRoute } from './routes/homeRoute';
-import { authRoute } from './routes/authRoute';
-import { userRoute } from './routes/userRouter';
-import { contaRoute } from './routes/contasRoute';
-import { adminRoute } from './routes/adminRoute';
+import { homeRoute } from './routes/home/homeRoute';
+import { emailRoute } from './routes/email/emailRoute';
 
 dotenv.config();
 
-const whitelist = ['http://localhost:3000'];
+const whitelist = ['http://localhost:5173'];
 
 const corsOptions: cors.CorsOptions = {
     origin: function (origin, callback) {
@@ -21,7 +16,7 @@ const corsOptions: cors.CorsOptions = {
         } else {
             callback(new Error('Not allowed by CORS'));
         }
-    }
+    },
 };
 
 class App {
@@ -31,7 +26,6 @@ class App {
         this.app = express();
         this.middlewares();
         this.routes();
-        this.connectionDB();
     }
 
     middlewares() {
@@ -43,19 +37,7 @@ class App {
 
     routes() {
         this.app.use('/api/', homeRoute);
-        this.app.use('/api/admin/', adminRoute);
-        this.app.use('/api/contas/', contaRoute);
-        this.app.use('/api/user/', userRoute);
-        this.app.use('/api/login/', authRoute);
-    }
-
-    async connectionDB() {
-        try {
-            await mongoose.connect(database.url);
-            console.log('[server]: Conexão feita com sucesso');
-        } catch (err) {
-            console.error('Erro ao conectar com o banco', err);
-        }
+        this.app.use('/api/', emailRoute);
     }
 }
 
