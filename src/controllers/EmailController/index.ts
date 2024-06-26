@@ -16,6 +16,7 @@ class EmailController {
             // Recebe os dados no corpo da requisição
             let { name, email, message, assunto }: MessageReceivedProtocol = req.body;
             console.log(req.body);
+
             // Verifica a se tem espaços na esquerda ou direita da string
             name = name?.trim();
             email = email?.trim();
