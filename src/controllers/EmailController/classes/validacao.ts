@@ -1,8 +1,5 @@
 import { isEmail } from 'validator';
-
-type ErrorType = {
-    message: string;
-};
+import { ErrorType } from '../interfaces/validacao';
 
 export class Validation {
     public errors: ErrorType[];
