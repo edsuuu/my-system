@@ -23,6 +23,7 @@
     "express": "^4.19.2",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.4",
     "nodemailer": "^6.9.14",
     "tsconfig-paths": "^4.2.0",
     "validator": "^13.12.0"
