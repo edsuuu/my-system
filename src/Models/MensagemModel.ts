@@ -9,7 +9,7 @@ interface ITicket extends Document {
     updatedAt: Date;
 }
 
-const TicketSchema = new Schema<ITicket>(
+const MensagemModel = new Schema<ITicket>(
     {
         name: {
             type: String,
@@ -42,9 +42,9 @@ const TicketSchema = new Schema<ITicket>(
     },
 );
 //ta salvando no banco mas nao ta expirando
-TicketSchema.index({ createdAt: 1 }, { expireAfterSeconds: 10 });
+MensagemModel.index({ createdAt: 1 }, { expireAfterSeconds: 10 });
 
-const TicketModel: Model<ITicket> = mongoose.model<ITicket>('tickets', TicketSchema);
+const TicketModel: Model<ITicket> = mongoose.model<ITicket>('tickets', MensagemModel);
 
 export default TicketModel;
 export { ITicket };
