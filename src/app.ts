@@ -2,8 +2,10 @@ import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
-import { homeRoute } from './routes/home/homeRoute';
-import { emailRoute } from './routes/email/emailRoute';
+import mongoose from 'mongoose';
+import databaseConfig from './config/database';
+import { homeRoute } from './Routes/home/homeRoute';
+import { emailRoute } from './Routes/email/emailRoute';
 
 dotenv.config();
 
@@ -26,6 +28,7 @@ class App {
         this.app = express();
         this.middlewares();
         this.routes();
+        this.connectionDB();
     }
 
     middlewares() {
@@ -38,6 +41,15 @@ class App {
     routes() {
         this.app.use('/', homeRoute);
         this.app.use('/email', emailRoute);
+    }
+
+    async connectionDB() {
+        try {
+            await mongoose.connect(databaseConfig.url);
+            console.log('[server]: Conexão com o banco de dados feita com sucesso !');
+        } catch (err) {
+            console.error('[server-warning]: Erro ao conectar com o banco de dados !', err);
+        }
     }
 }
 

@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import { ValidationEmail, IsEmpty } from './classes/validacao';
-import { MessageObj } from './classes/messageObj';
 import { MessageReceivedProtocol } from './interfaces/message';
+import { SendAndSaveMessages } from './classes/SendAndSaveMessages';
 
 class EmailController {
-    sendMessage(req: Request, res: Response) {
+    async sendMessage(req: Request, res: Response) {
         const bodyValidator = new IsEmpty();
         const emailValidator = new ValidationEmail();
 
@@ -15,10 +15,9 @@ class EmailController {
 
             // Recebe os dados no corpo da requisição
             let { name, email, message, assunto }: MessageReceivedProtocol = req.body;
-            console.log(req.body);
 
             // Verifica a se tem espaços na esquerda ou direita da string
-            console.log('passei 1');
+
             name = name?.trim();
             email = email?.trim();
             assunto = assunto?.trim();
@@ -28,22 +27,22 @@ class EmailController {
             if (!emailValidator.emailIsValid(email)) {
                 bodyValidator.errors.push({ message: 'O email é inválido' });
             }
-            console.log('passei 2');
 
             // Se houver erro retorna todos erros num array
             const errors = bodyValidator.getErrors();
             if (errors.length > 0) {
                 return res.json({ errors });
             }
-            const messageObj = new MessageObj(name, email, assunto, message);
+            const sendAndSave = new SendAndSaveMessages(name, email, assunto, message);
 
-            console.log('vindo do index', messageObj);
+            // Se passar por todas validacoes é criado um ticket e salvo no banco que vai retornar um boolean
+            const novoTicket = await sendAndSave.criarTicket();
 
-            // Se passar por todas validacoes é mandado para processamento para criar a mensagem para enviar para o email
-            const processedMessage = messageObj.processMessage();
-
-            console.log(processedMessage);
-            res.json(processedMessage);
+            if (novoTicket === true) {
+                res.status(201).json({ message: 'Mensagem enviada com sucesso!' });
+            } else {
+                res.status(400).json({ error: 'Erro ao enviar a mensagem' });
+            }
         } catch (error) {
             console.log(error);
             res.json(error);

@@ -1,17 +1,17 @@
 import mongoose, { Document, Model, Schema } from 'mongoose';
 
 interface ITicket extends Document {
-    nome: string;
+    name: string;
     assunto: string;
     email: string;
     message: string;
-    createdAt?: Date;
-    updatedAt?: Date;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 const TicketSchema = new Schema<ITicket>(
     {
-        nome: {
+        name: {
             type: String,
             default: '',
             required: true,
@@ -35,9 +35,15 @@ const TicketSchema = new Schema<ITicket>(
             required: true,
             trim: true,
         },
+    }, // Para atualizar a data no banco, e excluir depois de 7 dias
+    {
+        timestamps: true,
+        // expireAfterSeconds: 604800,
     },
-    { timestamps: true },
 );
+//ta salvando no banco mas nao ta expirando
+TicketSchema.index({ createdAt: 1 }, { expireAfterSeconds: 10 });
+
 const TicketModel: Model<ITicket> = mongoose.model<ITicket>('tickets', TicketSchema);
 
 export default TicketModel;
