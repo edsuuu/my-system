@@ -9,7 +9,7 @@ import { emailRoute } from './routes/email/emailRoute';
 
 dotenv.config();
 
-const whitelist = ['http://localhost:5173'];
+const whitelist = ['https://meuportfolio-edsu.ddns.net'];
 
 const corsOptions: cors.CorsOptions = {
     origin: function (origin, callback) {
