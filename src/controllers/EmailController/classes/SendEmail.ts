@@ -37,8 +37,8 @@ export default class SendEmail {
         };
 
         try {
-            // const info = await this.transporter.sendMail(mailOptions);
-            // console.log('E-mail enviado: ' + info.response);
+            const info = await this.transporter.sendMail(mailOptions);
+            console.log('E-mail enviado: ' + info.response);
             return { success: true, code: { responseCode: 200, messageSuccess: 'E-mail enviado com sucesso' } };
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: EmailError | any) {
