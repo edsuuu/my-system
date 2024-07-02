@@ -37,8 +37,8 @@ export default class SendEmail {
         };
 
         try {
-            const info = await this.transporter.sendMail(mailOptions);
-            console.log('E-mail enviado: ' + info.response);
+            // const info = await this.transporter.sendMail(mailOptions);
+            // console.log('E-mail enviado: ' + info.response);
             return { success: true, code: { responseCode: 200, messageSuccess: 'E-mail enviado com sucesso' } };
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: EmailError | any) {
@@ -48,11 +48,11 @@ export default class SendEmail {
 
     createMessageForEmail(name: string, email: string, assunto: string, message: string): string {
         return `
-            <h1>Mensagem criada por ${name}</h1>
-            <h2>Solicitou que entre em contato com o email: ${email}</h2>
-            <h2>Assunto da Mensagem: ${assunto}</h2>
-            <h2>Mensagem:</h2>
-            <h2>${message}</h2>
+        Mensagem criada por ${name}
+        Solicitou que entre em contato com o email: ${email}
+        Assunto da Mensagem: ${assunto}
+        Mensagem:
+        ${message}
         `;
     }
 }

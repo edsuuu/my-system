@@ -45,7 +45,7 @@ class EmailController {
             if (result.success === true) {
                 res.status(201).json({
                     statusCodeSaveMessage: 201,
-                    messageSave: 'Mensagem salva com sucesso!',
+                    messageSave: 'Mensagem salva com sucesso! Em breve entrarei em contato.',
                     statusCodeSendEmail: resultSendEmail.code?.responseCode || resultSendEmail.error?.responseCode,
                     messageEmail: resultSendEmail.code?.messageSuccess || resultSendEmail.error?.response,
                 });
