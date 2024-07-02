@@ -4,8 +4,8 @@ import cors from 'cors';
 import helmet from 'helmet';
 import mongoose from 'mongoose';
 import databaseConfig from './config/database';
-import { homeRoute } from './Routes/home/homeRoute';
-import { emailRoute } from './Routes/email/emailRoute';
+import { homeRoute } from './routes/home/homeRoute';
+import { emailRoute } from './routes/email/emailRoute';
 
 dotenv.config();
 

@@ -1,4 +1,4 @@
-import MensagemModel from '../../../Models/MensagemModel';
+import MensagemModel from '../../../models/MensagemModel';
 
 export class SaveMessages {
     constructor(
